@@ -4,7 +4,7 @@ from langgraph.graph import StateGraph, START, END
 from langgraph.graph.message import add_messages
 from langchain_ollama import ChatOllama
 
-
+# CREATE LLM MODEL
 llm = ChatOllama(model="qwen3:latest")
 
 
