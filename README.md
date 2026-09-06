@@ -20,15 +20,15 @@ This repository focuses on learning by building small examples and gradually inc
 
 ### 🟡 2. LLM Integration
 
-- [ ] LLM Integration with AI
-- [ ] Connecting LLM with LangGraph
-- [ ] LLM-based Nodes
+- [X] LLM Integration with AI
+- [X] Connecting LLM with LangGraph
+- [X] LLM-based Nodes
 
 ### 🟠 3. Graph Control & Routing
 
-- [X] Conditional Edges
-- [X] Router / Routing Logic
-- [X] Dynamic Workflow Execution
+- [ ] Conditional Edges
+- [ ] Router / Routing Logic
+- [ ] Dynamic Workflow Execution
 
 ### 🔵 4. Tools & Agents
 
