@@ -20,7 +20,7 @@ This repository focuses on learning by building small examples and gradually inc
 
 ### 🟡 2. LLM Integration
 
-- [ ] LLM Integration with Ollama
+- [ ] LLM Integration with AI
 - [ ] Connecting LLM with LangGraph
 - [ ] LLM-based Nodes
 
