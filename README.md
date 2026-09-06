@@ -26,9 +26,9 @@ This repository focuses on learning by building small examples and gradually inc
 
 ### 🟠 3. Graph Control & Routing
 
-- [ ] Conditional Edges
-- [ ] Router / Routing Logic
-- [ ] Dynamic Workflow Execution
+- [X] Conditional Edges
+- [X] Router / Routing Logic
+- [X] Dynamic Workflow Execution
 
 ### 🔵 4. Tools & Agents
 
