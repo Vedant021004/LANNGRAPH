@@ -1,365 +1,117 @@
 # 🦜 LangGraph Learning Roadmap
 
-A beginner-friendly journey to understand **LangGraph** from the basics to **Multi-Agent Systems**.
+A beginner-friendly, hands-on journey to learn **LangGraph from the fundamentals to Multi-Agent Systems**.
 
-This repository contains simple examples and practice code for learning how LangGraph works step-by-step.
+This repository focuses on learning by building small examples and gradually increasing complexity.
 
 ---
 
 ## 🎯 Learning Roadmap
 
-### 🟢 1. State
+### 🟢 1. LangGraph Fundamentals
 
-Understand what **State** is and why it is required in a LangGraph workflow.
+- [x] State
+- [x] StateGraph
+- [x] Nodes
+- [x] Edges
+- [x] Messages
+- [x] `Annotated` + `add_messages`
+- [x] Building a Basic Graph
 
-> State = The shared data/memory that flows between different nodes.
+### 🟡 2. LLM Integration
 
----
+- [ ] LLM Integration with Ollama
+- [ ] Connecting LLM with LangGraph
+- [ ] LLM-based Nodes
 
-### 🟢 2. Nodes
+### 🟠 3. Graph Control & Routing
 
-Learn how to create **Nodes** that perform specific tasks.
+- [ ] Conditional Edges
+- [ ] Router / Routing Logic
+- [ ] Dynamic Workflow Execution
 
-> Node = A function that does some work.
+### 🔵 4. Tools & Agents
 
-Example:
+- [ ] Tool Calling
+- [ ] ToolNode
+- [ ] LLM ↔ Tool Execution Loop
+- [ ] Building a Simple Agent
+- [ ] Agent Workflow
 
-```text
-Input → Node → Output
-```
+### 🟣 5. Memory & Persistence
 
----
+- [ ] Memory
+- [ ] Checkpointing
+- [ ] Thread / Conversation Memory
+- [ ] Human-in-the-Loop
 
-### 🟢 3. Edges
+### 🔴 6. Multi-Agent Systems
 
-Learn how to connect nodes and define the workflow.
-
-> Edge = Connection between two nodes.
-
-```text
-Node A → Node B → Node C
-```
-
----
-
-### 🟢 4. Messages
-
-Understand how messages are passed between the user, LLM, and tools.
-
-```text
-User → Message → LLM → Response
-```
-
----
-
-### 🟢 5. Annotated + add_messages
-
-Learn how LangGraph manages message state using:
-
-* `Annotated`
-* `add_messages`
-
-This helps maintain and update conversation history.
+- [ ] Multiple Agents
+- [ ] Agent-to-Agent Communication
+- [ ] Multi-Agent Workflow
+- [ ] Multi-Agent Architecture
 
 ---
 
-### 🟢 6. LLM with Ollama
+## 🧠 Concepts Covered
 
-Connect a local LLM with LangGraph using **Ollama**.
-
-```text
-User
- ↓
-LangGraph
- ↓
-Ollama
- ↓
-LLM
- ↓
-Response
-```
-
----
-
-### 🟡 7. Conditional Edges
-
-Learn how to make decisions inside a graph.
-
-```text
-          ┌──→ Node A
-Input → Decision
-          └──→ Node B
-```
-
-The next node depends on the current state.
+| # | Concept | Level |
+|---|---|---|
+| 1 | State | 🟢 Beginner |
+| 2 | StateGraph | 🟢 Beginner |
+| 3 | Nodes | 🟢 Beginner |
+| 4 | Edges | 🟢 Beginner |
+| 5 | Messages | 🟢 Beginner |
+| 6 | Annotated + add_messages | 🟢 Beginner |
+| 7 | LLM Integration | 🟡 Intermediate |
+| 8 | Conditional Edges | 🟡 Intermediate |
+| 9 | Router | 🟡 Intermediate |
+| 10 | Tool Calling | 🟡 Intermediate |
+| 11 | ToolNode | 🟡 Intermediate |
+| 12 | LLM ↔ Tool Loop | 🟡 Intermediate |
+| 13 | Agent Workflow | 🟡 Intermediate |
+| 14 | Memory / Checkpointing | 🟡 Intermediate |
+| 15 | Human-in-the-Loop | 🟡 Intermediate |
+| 16 | Multiple Agents | 🔴 Advanced |
+| 17 | Agent-to-Agent Communication | 🔴 Advanced |
+| 18 | Multi-Agent Architecture | 🔴 Advanced |
 
 ---
 
-### 🟡 8. Router
+## 🛠️ Tech Stack
 
-Learn how to create a **Router** that decides where the request should go.
-
-```text
-              ┌──→ Tool A
-User → Router ├──→ Tool B
-              └──→ LLM
-```
-
----
-
-## 🔵 Tool Calling & Agents
-
-### 9. Tool Calling
-
-Learn how an LLM can decide when it needs an external tool.
-
-Examples:
-
-* Calculator
-* Search
-* Weather
-* Database
-* Custom Python functions
-
-```text
-User → LLM → Tool → LLM → Response
-```
+- 🐍 Python
+- 🦜 LangGraph
+- 🦜 LangChain
+- 🧠 Ollama
+- 🤖 LLMs
+- 🔧 Tools & Tool Calling
 
 ---
 
-### 10. ToolNode
-
-Learn how LangGraph's `ToolNode` executes tools automatically.
-
-```text
-LLM
- ↓
-Tool Call
- ↓
-ToolNode
- ↓
-Tool Result
-```
-
----
-
-### 11. LLM ↔ Tool Loop
-
-Build a loop where the LLM can repeatedly call tools until it has enough information.
-
-```text
-       ┌──────────────┐
-       ↓              │
-User → LLM → Tool → Result
-       ↑              │
-       └──────────────┘
-              ↓
-           Final Answer
-```
-
----
-
-## 🤖 Agent Workflows
-
-### 12. Agent Workflow
-
-Combine:
-
-* State
-* Nodes
-* Edges
-* LLM
-* Tools
-* Conditional logic
-
-to build an **AI Agent workflow**.
-
-```text
-User
- ↓
-Agent
- ↓
-Think
- ↓
-Choose Tool
- ↓
-Execute Tool
- ↓
-Observe Result
- ↓
-Final Answer
-```
-
----
-
-### 13. Memory / Checkpointing
-
-Learn how to give agents **memory** using checkpointing.
-
-This allows the graph to maintain state across interactions.
-
-```text
-Conversation 1
-      ↓
-  Checkpoint
-      ↓
-Conversation 2
-      ↓
- Previous State
-```
-
----
-
-## 🔴 Multi-Agent Systems
-
-### 14. Multiple Agents
-
-Learn how multiple specialized agents can work together.
-
-Example:
-
-```text
-             ┌→ Research Agent
-User → Supervisor
-             ├→ Coding Agent
-             │
-             └→ Writing Agent
-```
-
-Each agent performs a specific task.
-
----
-
-### 15. Multi-Agent Architecture
-
-Final step: build complete **Multi-Agent Systems**.
-
-Learn architectures such as:
-
-* Supervisor → Agents
-* Agent → Agent
-* Parallel Agents
-* Sequential Agents
-* Hierarchical Agents
-
-Example:
-
-```text
-                    ┌→ Research Agent ──┐
-                    │                   │
-User → Supervisor ──┼→ Coding Agent ────┼→ Final Response
-                    │                   │
-                    └→ Review Agent ────┘
-```
-
----
-
-# 📚 Concepts Covered
-
-| #  | Concept                  | Level           |
-| -- | ------------------------ | --------------- |
-| 1  | State                    | 🟢 Beginner     |
-| 2  | Nodes                    | 🟢 Beginner     |
-| 3  | Edges                    | 🟢 Beginner     |
-| 4  | Messages                 | 🟢 Beginner     |
-| 5  | Annotated + add_messages | 🟢 Beginner     |
-| 6  | LLM + Ollama             | 🟢 Beginner     |
-| 7  | Conditional Edges        | 🟡 Intermediate |
-| 8  | Router                   | 🟡 Intermediate |
-| 9  | Tool Calling             | 🟡 Intermediate |
-| 10 | ToolNode                 | 🟡 Intermediate |
-| 11 | LLM ↔ Tool Loop          | 🟡 Intermediate |
-| 12 | Agent Workflow           | 🟡 Intermediate |
-| 13 | Memory / Checkpointing   | 🟡 Intermediate |
-| 14 | Multiple Agents          | 🔴 Advanced     |
-| 15 | Multi-Agent Architecture | 🔴 Advanced     |
-
----
-
-# 🛠️ Tech Stack
-
-* 🐍 Python
-* 🦜 LangGraph
-* 🦜 LangChain
-* 🧠 Ollama
-* 🤖 LLMs
-* 🔧 Tools & Tool Calling
-
----
-
-# 📂 Repository Structure
+## 📂 Repository Structure
 
 ```text
 langgraph-learning/
 │
 ├── 01_state/
-├── 02_nodes/
-├── 03_edges/
-├── 04_messages/
-├── 05_annotated_add_messages/
-├── 06_llm_ollama/
-├── 07_conditional_edges/
-├── 08_router/
-├── 09_tool_calling/
-├── 10_tool_node/
-├── 11_llm_tool_loop/
-├── 12_agent_workflow/
-├── 13_memory_checkpointing/
-├── 14_multiple_agents/
-├── 15_multi_agent_architecture/
+├── 02_stategraph/
+├── 03_nodes/
+├── 04_edges/
+├── 05_messages/
+├── 06_annotated_add_messages/
+├── 07_llm_ollama/
+├── 08_conditional_edges/
+├── 09_router/
+├── 10_tool_calling/
+├── 11_tool_node/
+├── 12_llm_tool_loop/
+├── 13_agent_workflow/
+├── 14_memory_checkpointing/
+├── 15_human_in_the_loop/
+├── 16_multiple_agents/
+├── 17_agent_to_agent/
+├── 18_multi_agent_architecture/
 │
 └── README.md
-```
-
----
-
-# 🎯 Goal
-
-The goal of this repository is to go from:
-
-```text
-Basic LangGraph Concepts
-        ↓
-LLM Integration
-        ↓
-Conditional Workflows
-        ↓
-Tool Calling
-        ↓
-Agents
-        ↓
-Memory
-        ↓
-Multiple Agents
-        ↓
-Multi-Agent Systems 🚀
-```
-
----
-
-## 🚀 Progress
-
-* [ ] State
-* [ ] Nodes
-* [ ] Edges
-* [ ] Messages
-* [ ] Annotated + add_messages
-* [ ] LLM with Ollama
-* [ ] Conditional Edges
-* [ ] Router
-* [ ] Tool Calling
-* [ ] ToolNode
-* [ ] LLM ↔ Tool Loop
-* [ ] Agent Workflow
-* [ ] Memory / Checkpointing
-* [ ] Multiple Agents
-* [ ] Multi-Agent Architecture
-
----
-
-### ⭐ Learning Philosophy
-
-> **Learn → Build → Experiment → Break → Fix → Repeat.**
-
-This repository is focused on **learning LangGraph by building small examples instead of only studying theory**.
-
