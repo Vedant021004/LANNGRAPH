@@ -117,3 +117,18 @@ result = app.invoke(
 
 print("\nRoute:", result["route"])
 print("Answer:", result["answer"])
+
+
+
+
+
+import subprocess
+
+subprocess.Popen("start calculator:", shell=True)
+
+import subprocess
+
+subprocess.Popen(
+        ["cmd", "/c", "start", "", "chrome"],
+        shell=True
+    )
