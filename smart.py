@@ -6,8 +6,48 @@ import subprocess
 import pyautogui
 import pygetwindow as gw
 import time
+import os
+import torch
+import sounddevice as sd
+from scipy.io.wavfile import write
+from transformers import pipeline
 
 load_dotenv()
+
+# ============================================================
+# LOCAL WHISPER (Hugging Face)
+# ============================================================
+whisper = pipeline(
+    "automatic-speech-recognition",
+    model="openai/whisper-large-v3-turbo",
+    dtype=torch.float16 if torch.cuda.is_available() else torch.float32,
+    device=0 if torch.cuda.is_available() else -1,
+)
+
+
+def listen():
+    sample_rate = 16000
+    duration = 5
+
+    print("\\n🎤 Listening...")
+
+    audio = sd.rec(
+        int(duration * sample_rate),
+        samplerate=sample_rate,
+        channels=1,
+        dtype="float32"
+    )
+    sd.wait()
+
+    filename = "voice_input.wav"
+    write(filename, sample_rate, audio)
+
+    print("🔄 Transcribing...")
+    result = whisper(filename)
+    text = result["text"].strip()
+
+    print("🗣️ You:", text)
+    return text
 
 llm = ChatGroq(
     model="openai/gpt-oss-20b"
@@ -22,6 +62,53 @@ class State(BaseModel):
     contact: str = ""
     message: str = ""
     answer: str = ""
+
+
+# ============================================================
+# Whisper can sometimes produce imperfect words. This LLM pass
+# cleans the transcription before it reaches the classifier.
+def normalize_input(state: State):
+
+    r = llm.invoke(
+        f"""
+You are a speech-to-text correction layer for a desktop assistant.
+
+The following text may come from speech recognition and can contain:
+- misheard words
+- missing punctuation
+- small grammar mistakes
+- phonetic spellings
+- repeated words
+- unclear phrasing
+
+Your job is ONLY to reconstruct what the user most likely intended.
+
+Rules:
+1. Preserve the user's intent exactly.
+2. Do not add actions the user did not request.
+3. Do not answer the request.
+4. Do not execute anything.
+5. Keep application names such as VS Code, Spotify, WhatsApp,
+   Chrome, YouTube, and GitHub correct.
+6. Preserve names, search queries, and message text.
+7. Return ONLY the corrected user command.
+8. If the input is already clear, return it unchanged.
+
+Raw input:
+{state.question}
+"""
+    )
+
+    cleaned = r.content.strip()
+
+    return {
+        "question": cleaned
+    }
+
+
+# ============================================================
+# VOICE/TEXT NORMALIZER
+
 
 
 def classifier(state: State):
@@ -562,6 +649,11 @@ def general_llm(state: State):
 graph = StateGraph(State)
 
 graph.add_node(
+    "normalize_input",
+    normalize_input
+)
+
+graph.add_node(
     "classifier",
     classifier
 )
@@ -603,6 +695,11 @@ graph.add_node(
 
 graph.add_edge(
     START,
+    "normalize_input"
+)
+
+graph.add_edge(
+    "normalize_input",
     "classifier"
 )
 
@@ -660,7 +757,12 @@ app = graph.compile()
 
 while True:
 
-    question = input("\nAsk: ")
+    choice = input("\nPress ENTER to speak or type 't' for text: ")
+
+    if choice.lower().strip() == "t":
+        question = input("Ask: ")
+    else:
+        question = listen()
 
     if question.lower().strip() in [
         "exit",
