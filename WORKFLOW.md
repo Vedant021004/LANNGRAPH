@@ -1,4 +1,4 @@
-Bilkul! 🔥 Main tumhare liye Conditional Edge ka complete workflow README bana raha hoon — especially is tarah ki tumhe State → Classifier → Router → Conditional Edge → Next Node → State Update ka flow permanently clear ho jaye.
+
 
 🔀 LangGraph Conditional Edges — Complete Workflow
 
@@ -889,6 +889,3 @@ Conditional Edge:
 python_node:
 "Now I'll actually perform the Python-related work."
 
-In one sentence:
-
-Classifier state mein decision save karta hai → Router us decision ko read karke return karta hai → Conditional Edge us returned value ko actual next node se map karta hai → next node execute hota hai.
